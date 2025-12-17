@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('metadata_handover', function (Blueprint $table) {
+        Schema::create('metadata_logging', function (Blueprint $table) {
             $table->id();
             $table->string('metadata_name');      // task name or metadata
             $table->string('endpoint')->nullable();
@@ -25,6 +25,6 @@ return new class extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('metadata_handover');
+        Schema::dropIfExists('metadata_logging');
     }
 };
