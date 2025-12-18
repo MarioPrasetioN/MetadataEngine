@@ -75,9 +75,6 @@ use Carbon\Carbon;
                     'playout_type' => $playout_type,
                 ]));
 
-                // --- Route to pipeline based on network_code + local_code ---
-                $flow = 'unknown';
-
                 /** Request Number: ....... 
                  * Simple Flow: AWE + RCE
                 */
@@ -281,29 +278,6 @@ use Carbon\Carbon;
             \Log::info("Mid flow mock HTML uploaded to FTP successfully with start times");
         } catch (\Exception $e) {
             \Log::error("Failed to upload mid flow mock HTML: " . $e->getMessage());
-        }
-    }
-
-    private function getFlowTasks(string $flow): array
-    {
-        switch ($flow) {
-            case 'medium':
-                return [
-                    SelectFromDb::class,
-                    GenerateXml::class,
-                    UploadToFtp::class,
-                ];
-            case 'complex':
-                return [
-                    MoveFile::class,
-                    UploadToFtp::class,
-                    CallEndpoints::class,
-                ];
-            case 'simple':
-            default:
-                return [
-                    HttpCall::class,
-                ];
         }
     }
 }
