@@ -62,9 +62,29 @@ Logs each handover or processing task:
 | notes             | text      | Additional notes                        |
 | created_at        | timestamp | Automatically set on insert             |
 
+
 ## How to Run
 
 1. Clone the repository:
 ```bash
 git clone https://github.com/marioprasetion/metadata-engine.git
 cd metadata-engine
+```
+
+2. setup the env for database and ftp servers
+4. install with composer:
+```bash
+composer install
+```
+4. run migrations
+```bash
+php artisan migrate
+```
+5. run the server
+```bash
+php artisan serve
+```
+6. run with postman/browser, change the playout id accordingly:
+```bash
+http://127.0.0.1:8000/api/handover/nowplay?data=[%20{%20%22playout_id%22:%20%22RC2-B1-RCD-C-someaudio01%22,%20%22artist%22:%20%22-[R2G]%22,%20%22title%22:%20%22-[R2G%20-%20SHOWOPENER%20BU%20NV]%22,%20%22category%22:%20%22J%22,%20%22filename%22:%20%22r2g_Opener_Business_Update_NV.m4a%22,%20%22duration%22:%2012492,%20%22start_time%22:%20%2210.08.2022%2000:06:12.206%22,%20%22planned_start_time%22:%20%2210.08.2022%2000:03:00.000%22,%20%22cutout%22:%2014025,%20%22inserted_element%22:%20false,%20%22drift_ms%22:%200,%20%22playlist_date%22:%20%2209.08.2022%2023:52:36%22,%20%22retryCount%22:%200%20}%20]
+```
