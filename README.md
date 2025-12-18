@@ -1,4 +1,7 @@
-# Metadata Engine Backend (Prototype)
+<img width="1919" height="991" alt="image" src="https://github.com/user-attachments/assets/8ba3e094-ac12-4845-b9f1-89d3c9604e4e" />
+
+
+# Metadata Engine Backend (Prototype) + Filament Exploration
 
 A **Laravel 8 backend system** for managing radio playout metadata and automated handovers.  
 This project demonstrates **complex backend pipelines**, including JSON processing, HTML generation, FTP uploads, and HTTP calls.
