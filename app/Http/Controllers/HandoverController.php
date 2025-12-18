@@ -28,7 +28,39 @@ use Carbon\Carbon;
                 return response()->json(['error' => 'Invalid data'], 400);
             }
 
-            foreach ($payload as $item) {
+            foreach ($payload as $index => $item) {
+                $validator = \Validator::make($item, [
+                    'playout_id'         => 'required|string|max:50',
+                    'artist'             => 'nullable|string|max:100',
+                    'title'              => 'nullable|string|max:100',
+                    'duration'           => 'required|integer',
+                    'start_time'         => 'required|date_format:d.m.Y H:i:s.u',
+                    'planned_start_time' => 'nullable|date_format:d.m.Y H:i:s.u'
+                ]);
+
+                if ($validator->fails()) {
+                    return response()->json([
+                        'error' => 'Validation failed',
+                        'details' => $validator->errors(),
+                        'item_index' => $index
+                    ], 422);
+                }
+
+
+                /**
+                 * Check if playout id is not setup correctly with the naming convention
+                 * localCode-playout-networkCode-...
+                 */
+                $pattern = '/^[A-Z0-9]+-[A-Z0-9]+-[A-Z0-9]+/i';
+
+                if (!preg_match($pattern, $item['playout_id'])) {
+                    return response()->json([
+                        'error' => 'Invalid playout_id format (first 3 parts must match localCode - playout - networkCode)',
+                        'playout_id' => $item['playout_id'],
+                        'item_index' => $index
+                    ], 422);
+                }
+
                 // extract metadata from playout_id ---
                 // Example: RC1-B1-RCD-C
                 $parts = explode('-', $item['playout_id']);
