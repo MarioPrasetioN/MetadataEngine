@@ -9,7 +9,7 @@ The goal was to replace the current code and revamp it with a new system more re
 
 - **Simple Flow:** Receives JSON payload → performs a simple HTTP call and logs the result.  
 - **Mid Flow:** Receives JSON payload → combines with mock/DB data → generates an HTML “now playing” table → uploads to FTP.  
-- **Complex Flow:** Receives JSON payload → retrieves media files → uploads files to FTP → triggers multiple HTTP endpoints.  
+- **Complex Flow:** Receives JSON payload → Runs a pipeline tasks with Laravel Pipeline feature, the tasks are both flows above.
 - **Database Logging:** Stores payloads in `NowPlay` table and logs handover metadata in `MetadataLogging`.  
 - **Mock Data Support:** Allows testing with mock JSON datasets for mid and complex flows.  
 
